@@ -6,30 +6,25 @@ Arduino sketch for a puppet hat that animates two servo-driven arms. Targets the
 
 | Pin | Function |
 |-----|----------|
-| D9  | Left servo PWM signal |
-| D10 | Right servo PWM signal |
-| D8  | Left servo power-gate transistor (optional) |
-| D7  | Right servo power-gate transistor (optional) |
+| D9  | Servo PWM signal |
+| D8  | Servo power-gate transistor (optional) |
 
-- Servo signal pins are 3.3V logic — power servo motors from an external 5V supply sharing GND with the XIAO, not from the board's 3.3V rail.
-- Power gating (D7/D8) cuts motor current when arms are at rest to save battery. If not wired, leave those pins unconnected — the gate writes are harmless and servos stay always-powered.
+- Servo signal pin is 3.3V logic — power servo motor from an external 5V supply sharing GND with the XIAO, not from the board's 3.3V rail.
+- Power gating (D8) cuts motor current when arm is at rest to save battery. If not wired, leave D8 unconnected — the gate write is harmless and servo stays always-powered.
 
 ## Behavior
 
 - Poisson-distributed random intervals between wave events (`MEAN_INTERVAL_SEC`)
-- Each event randomly picks one arm to wave for 3–8 cycles
-- 5% chance of `spazArms()` instead — both arms thrash up/down for 15 cycles (Kermit mode)
-- Arms always return to `REST_ANGLE` before motors are gated off
+- Each event waves for 2–5 randomly chosen cycles; each cycle (up + down) takes 0.9 seconds
+- Arm always returns to `REST_ANGLE` before motor is gated off
 
 ## Key tuning constants (top of sketch)
 
 ```cpp
-REST_ANGLE        = 15;    // arm-down resting position — tune to your servo mounting
-WAVE_ANGLE        = 160;   // arm-up position — tune to your servo mounting
-WAVE_STEP_MS      = 6;     // ms per degree; lower = faster wave
-SPAZ_HOLD_MS      = 80;    // ms at each extreme during spaz
+REST_ANGLE        = 45;    // arm resting position — 45° from straight down
+WAVE_ANGLE        = 135;   // arm-up position — 90° of travel from REST_ANGLE
+WAVE_STEP_MS      = 5;     // ms per degree; 90° each way × 2 = 900ms/cycle
 MEAN_INTERVAL_SEC = 8.0f;  // mean seconds between events
-SPAZ_CHANCE_PCT   = 5;     // % chance of spaz vs normal wave
 ```
 
 ## Toolchain
