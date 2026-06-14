@@ -15,19 +15,19 @@ const int PIN_SERVO = D9;
 const int PIN_GATE  = D8;  // HIGH = servo motor powered
 
 // ─── Motion tuning ───────────────────────────────────────────────────────
-const int  REST_ANGLE      = 135;  // arm-down resting position (degrees)
-const int  WAVE_ANGLE      = 45;   // arm-up position (degrees)
+const int  REST_ANGLE      = 125;  // arm-down resting position (degrees)
+const int  WAVE_ANGLE      = 57;   // arm-up position (degrees)
 const int  WAVE_STEP_MS    = 5;    // ms per degree on the raise/lower sweeps
 
 // ─── Quick-wave tuning (only used when QUICK_WAVE = true) ────────────────
 const bool QUICK_WAVE      = true; // raise → one flick at top → lower
 const int  QUICK_RANGE     = 20;   // degrees of flick each side of WAVE_ANGLE
-const int  QUICK_STEP_MS   = 2;    // ms per degree during quick oscillation
+const int  QUICK_STEP_MS   = 3;    // ms per degree during quick oscillation
 
 // ─── Behavior tuning ─────────────────────────────────────────────────────
 const int   MIN_WAVE_CYCLES   = 3;
-const int   MAX_WAVE_CYCLES   = 6;
-const float MEAN_INTERVAL_SEC = 11.0f; // mean seconds between events (Poisson rate)
+const int   MAX_WAVE_CYCLES   = 8;
+const float MEAN_INTERVAL_SEC = 9.0f; // mean seconds between events (Poisson rate)
 
 // ─── Globals ─────────────────────────────────────────────────────────────
 Servo servo;
